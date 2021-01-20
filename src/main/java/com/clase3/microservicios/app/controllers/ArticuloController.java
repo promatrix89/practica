@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+
 @RestController
 public class ArticuloController {
     @Autowired
@@ -24,7 +25,7 @@ public class ArticuloController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id){
         Optional<Articulo> o = service.findById(id);
-        if(o.isEmpty()){
+        if(!o.isPresent()){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(o.get());
